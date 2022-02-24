@@ -46,11 +46,11 @@ function getTodos() {
         return
       }
       todos.map((t) => {
-        const { id, todo, done } = t
+        const { _id, todo, done } = t
 
         !done
           ? (htmlTemp = `
-      <li key='${id}'>
+      <li key='${_id}'>
           <label class='todo-name' >
           <input type="checkbox" name="" id="" class='todo-check'"> ${todo}
           </label>
@@ -58,7 +58,7 @@ function getTodos() {
       </li>
       `)
           : (htmlTemp = `
-      <li key='${id}'>
+      <li key='${_id}'>
 
       <label class='todo-name'style=' text-decoration: line-through' >
       <input type="checkbox" name="" id="" class='todo-check'" checked> ${todo}
