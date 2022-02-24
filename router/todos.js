@@ -59,18 +59,22 @@ todoRoute.delete('/:id', (req, res) => {
 
 // add a todo
 todoRoute.post('/', (req, res) => {
-  const todo = req.body.todo
+  const { todo, done } = req.body
 
-  if (!todo) return res.status(400).send('ivalide input')
+  if (!req.body) return res.status(400).send('ivalide input')
 
-  const newTodo = {
-    id: todosData.length + 1,
-    todo: todo,
-    done: false,
-  }
+  // console.log(todo)
 
-  todosData.push(newTodo)
-  res.send(newTodo)
+  new Todos({ todo: todo, done: done }).save()
+
+  // const newTodo = {
+  //   id: todosData.length + 1,
+  //   todo: todo,
+  //   done: false,
+  // }
+
+  // todosData.push(newTodo)
+  // res.send(newTodo)
 })
 
 // update todo
