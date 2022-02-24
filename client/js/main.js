@@ -10,7 +10,18 @@ function trash() {
     trash.addEventListener('click', (e) => {
       const perantElement = trash.parentNode
       let key = perantElement.getAttribute('key')
-      Todo(`${url}/${key}`, 'DELETE')
+      // Todo(`${url}/${key}`, 'DELETE')
+      // console.log(`${url}/${key}`)
+      const request = {
+        method: 'Delete',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      fetch(`${url}/${key}`, request).then(() => {
+        getTodos()
+        console.log('Deleted')
+      })
     })
   })
 }
@@ -85,8 +96,9 @@ async function Todo(url, method, data) {
     body: JSON.stringify(data),
   }
   const test = await fetch(url, request)
-  getTodos()
-  return test
+  // getTodos()
+  // return test
+  console.log(test)
 }
 // add todo frpm promt input
 document.querySelector('#addTodo').addEventListener('click', () => {

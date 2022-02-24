@@ -44,6 +44,12 @@ todoRoute.delete('/:id', (req, res) => {
   // if (!todo)
   //   return res.status(404).send(`Todo with the ID '${todoId}' was not found`)
   Todos.findByIdAndDelete(todoId).then(() => {
+    // Todos.find()
+    //   .then((todos) => {
+    //     // if (todos.length === 0) return res.status(404).send('No Todos Now')
+    //     res.send(todos)
+    //   })
+    //   .catch((err) => console.error(err))
     res.send('Data Deleted')
   })
 
