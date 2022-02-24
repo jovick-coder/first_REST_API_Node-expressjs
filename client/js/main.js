@@ -3,8 +3,6 @@ const loading = document.querySelector('.loading')
 const message = document.querySelector('.message')
 const url = 'http://localhost:3000/api/todos'
 
-todoItems = []
-
 function trash() {
   const trashs = document.querySelectorAll('#todo-list>li>.icon')
 
@@ -41,34 +39,33 @@ function getTodos() {
 
   fetch(url)
     .then((res) => res.json())
-    .then((data) => {
+    .then((todos) => {
       todoList.innerHTML = ''
-      if (data.length === 0) {
+      if (todos.length === 0) {
         todoList.innerHTML = "<div class='message'>No Todo found Add some</div>"
         return
       }
-      todoItems = { ...data }
-      data.map((i) => {
-        const { id, todo, done } = i
+      todos.map((t) => {
+        const { id, todo, done } = t
 
         !done
           ? (htmlTemp = `
-<li key='${id}'>
-    <label class='todo-name' >
-    <input type="checkbox" name="" id="" class='todo-check'"> ${todo}
-    </label>
-   <div class='icon'> <img src="./img/trash.svg" alt="" srcset=""></div>
-</li>
-`)
+      <li key='${id}'>
+          <label class='todo-name' >
+          <input type="checkbox" name="" id="" class='todo-check'"> ${todo}
+          </label>
+         <div class='icon'> <img src="./img/trash.svg" alt="" srcset=""></div>
+      </li>
+      `)
           : (htmlTemp = `
-<li key='${id}'>
+      <li key='${id}'>
 
-<label class='todo-name'style=' text-decoration: line-through' >
-<input type="checkbox" name="" id="" class='todo-check'" checked> ${todo}
-</label>
-<div class='icon'> <img src="./img/trash.svg" alt="" srcset=""></div>
-</li>
-`)
+      <label class='todo-name'style=' text-decoration: line-through' >
+      <input type="checkbox" name="" id="" class='todo-check'" checked> ${todo}
+      </label>
+      <div class='icon'> <img src="./img/trash.svg" alt="" srcset=""></div>
+      </li>
+      `)
 
         todoList.innerHTML += htmlTemp
       })
@@ -76,6 +73,7 @@ function getTodos() {
       getLis()
       trash()
     })
+    .catch((err) => console.log(err))
 }
 
 async function Todo(url, method, data) {
