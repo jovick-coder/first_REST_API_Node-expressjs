@@ -1,14 +1,23 @@
 const express = require('express')
+const { default: mongoose } = require('mongoose')
 
 const todoRoute = express.Router()
 
 const todosData = []
 
+const Todos = mongoose.model(
+  'Todo',
+  new mongoose.Schema({
+    todo: { type: String, require: true },
+    done: { type: Boolean, require: true },
+    date: { type: Date, default: Date.now, require: true },
+  }),
+)
+function getTodos() {}
+getTodos()
+
 // Get all todos
-todoRoute.get('/', (req, res) => {
-  // if (todosData.length === 0) return res.status(404).send('No Todos Now')
-  res.send(todosData)
-})
+todoRoute.get('/', (req, res) => {})
 
 // Get A todo
 todoRoute.get('/:id', (req, res) => {
