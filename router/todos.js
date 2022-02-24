@@ -57,10 +57,11 @@ todoRoute.put('/:id', (req, res) => {
   const todoId = req.params.id
 
   updateTodo = req.body
-
   Todos.findByIdAndUpdate(todoId, {
     $set: updateTodo,
-  }).then((newTodo) => console.log(newTodo))
+  }).then((newTodo) => {
+    res.send(newTodo)
+  })
 })
 
 module.exports = todoRoute

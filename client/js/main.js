@@ -39,7 +39,7 @@ function trash() {
   })
 }
 
-function getLis() {
+function update() {
   const checkbox = document.querySelectorAll('#todo-list>li>label>input')
   checkbox.forEach((div, i) => {
     div.addEventListener('click', (e) => {
@@ -51,7 +51,7 @@ function getLis() {
         ? (perantElement.style.textDecoration = 'line-through')
         : (perantElement.style.textDecoration = 'none')
       let key = grandPerantElement.getAttribute('key')
-      updateTodo = !done ? { id: key, done: false } : { id: key, done: true }
+      updateTodo = !done ? { done: false } : { done: true }
       const request = {
         method: 'PUT',
         headers: {
@@ -105,7 +105,7 @@ function getTodos() {
         todoList.innerHTML += htmlTemp
       })
 
-      getLis()
+      update()
       trash()
     })
     .catch((err) => console.log(err))
