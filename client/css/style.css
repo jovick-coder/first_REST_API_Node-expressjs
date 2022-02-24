@@ -11,7 +11,7 @@ html {
 .flexbox {
   display: flex;
   width: 100vw;
-  /* min-height: 100vh; */
+  min-height: 100vh;
 }
 .todo-div {
   width: 100%;
