@@ -23,17 +23,18 @@ todoRoute.get('/', (req, res) => {
     .catch((err) => console.error(err))
 })
 
-// Get A todo
-todoRoute.get('/:id', (req, res) => {
-  const todoId = req.params.id
+// // Get A todo
+// no need to call a single todo in out application
+// todoRoute.get('/:id', (req, res) => {
+//   const todoId = req.params.id
 
-  const todo = todosData.find((todo) => todo.id === parseInt(todoId))
+//   const todo = todosData.find((todo) => todo.id === parseInt(todoId))
 
-  if (!todo)
-    return res.status(404).send(`Todo with the ID '${todoId}' was not found`)
+//   if (!todo)
+//     return res.status(404).send(`Todo with the ID '${todoId}' was not found`)
 
-  res.send(todo)
-})
+//   res.send(todo)
+// })
 
 // delete a todo
 todoRoute.delete('/:id', (req, res) => {
