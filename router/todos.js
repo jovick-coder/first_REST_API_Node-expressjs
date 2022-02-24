@@ -17,7 +17,6 @@ const Todos = mongoose.model(
 todoRoute.get('/', (req, res) => {
   Todos.find()
     .then((todos) => {
-      // if (todos.length === 0) return res.status(404).send('No Todos Now')
       res.send(todos)
     })
     .catch((err) => console.error(err))
@@ -39,22 +38,9 @@ todoRoute.get('/', (req, res) => {
 // delete a todo
 todoRoute.delete('/:id', (req, res) => {
   const todoId = req.params.id
-  // const todo = todosData.find((todo) => todo.id === parseInt(todoId))
-
-  // if (!todo)
-  //   return res.status(404).send(`Todo with the ID '${todoId}' was not found`)
   Todos.findByIdAndDelete(todoId).then(() => {
-    // Todos.find()
-    //   .then((todos) => {
-    //     // if (todos.length === 0) return res.status(404).send('No Todos Now')
-    //     res.send(todos)
-    //   })
-    //   .catch((err) => console.error(err))
     res.send('Data Deleted')
   })
-
-  // const todoIndex = todosData.indexOf(todo)
-  // const deletedTodo = todosData.splice(todoIndex, 1)
 })
 
 // add a todo
@@ -63,34 +49,17 @@ todoRoute.post('/', (req, res) => {
 
   if (!req.body) return res.status(400).send('ivalide input')
 
-  // console.log(todo)
-
   new Todos({ todo: todo, done: done }).save()
-
-  // const newTodo = {
-  //   id: todosData.length + 1,
-  //   todo: todo,
-  //   done: false,
-  // }
-
-  // todosData.push(newTodo)
-  // res.send(newTodo)
 })
 
 // update todo
-
 todoRoute.put('/:id', (req, res) => {
   const todoId = parseInt(req.params.id)
   const todo = todosData.find((todo) => todo.id === todoId)
 
   if (!todo) return res.status(404).send(`No todo with the ID ${todoId} `)
-  // if (!req.body.done)
-  //   return res.status(400).send('no todo found in your request body')
-  // todo.todo = req.body.todo
   todo.done = req.body.done
-
   res.send(todo)
-  // console.log(req.body.done)
 })
 
 module.exports = todoRoute
