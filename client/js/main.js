@@ -10,8 +10,6 @@ function trash() {
     trash.addEventListener('click', (e) => {
       const perantElement = trash.parentNode
       let key = perantElement.getAttribute('key')
-      // Todo(`${url}/${key}`, 'DELETE')
-      // console.log(`${url}/${key}`)
       const request = {
         method: 'Delete',
         headers: {
@@ -20,7 +18,6 @@ function trash() {
       }
       fetch(`${url}/${key}`, request).then(() => {
         getTodos()
-        console.log('Deleted')
       })
     })
   })
@@ -87,7 +84,7 @@ function getTodos() {
     .catch((err) => console.log(err))
 }
 
-async function Todo(url, method, data) {
+function Todo(url, method, data) {
   const request = {
     method: method,
     headers: {
@@ -95,17 +92,19 @@ async function Todo(url, method, data) {
     },
     body: JSON.stringify(data),
   }
-  const test = await fetch(url, request)
-  // getTodos()
-  // return test
-  console.log(test)
+  fetch(url, request)
+    .then(() => {
+      console.log('done')
+    })
+    .catch((err) => console.error(err))
+  getTodos()
 }
 // add todo frpm promt input
 document.querySelector('#addTodo').addEventListener('click', () => {
   const todo = prompt('Enter Your Todo')
   if (todo === '') alert('Empty Todo')
 
-  const newTodo = { todo: todo }
+  const newTodo = { todo: todo, done: false }
 
-  Todo(url, 'POST', newTodo)
+  Todo(url, 'POST', newTodo).then(console.log('hi'))
 })
