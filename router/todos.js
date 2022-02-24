@@ -39,15 +39,16 @@ todoRoute.get('/', (req, res) => {
 // delete a todo
 todoRoute.delete('/:id', (req, res) => {
   const todoId = req.params.id
-  const todo = todosData.find((todo) => todo.id === parseInt(todoId))
+  // const todo = todosData.find((todo) => todo.id === parseInt(todoId))
 
-  if (!todo)
-    return res.status(404).send(`Todo with the ID '${todoId}' was not found`)
+  // if (!todo)
+  //   return res.status(404).send(`Todo with the ID '${todoId}' was not found`)
+  Todos.findByIdAndDelete(todoId).then(() => {
+    res.send('Data Deleted')
+  })
 
-  const todoIndex = todosData.indexOf(todo)
-
-  const deletedTodo = todosData.splice(todoIndex, 1)
-  res.send(deletedTodo)
+  // const todoIndex = todosData.indexOf(todo)
+  // const deletedTodo = todosData.splice(todoIndex, 1)
 })
 
 // add a todo
