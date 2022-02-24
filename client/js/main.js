@@ -3,6 +3,22 @@ const loading = document.querySelector('.loading')
 const message = document.querySelector('.message')
 const url = 'http://localhost:3000/api/todos'
 
+// add todo frpm promt input
+document.querySelector('#addTodo').addEventListener('click', () => {
+  const todo = prompt('Enter Your Todo')
+  if (todo === '') alert('Empty Todo')
+
+  const newTodo = { todo: todo, done: false }
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newTodo),
+  })
+  getTodos()
+})
+
 function trash() {
   const trashs = document.querySelectorAll('#todo-list>li>.icon')
 
@@ -99,12 +115,3 @@ function Todo(url, method, data) {
     .catch((err) => console.error(err))
   getTodos()
 }
-// add todo frpm promt input
-document.querySelector('#addTodo').addEventListener('click', () => {
-  const todo = prompt('Enter Your Todo')
-  if (todo === '') alert('Empty Todo')
-
-  const newTodo = { todo: todo, done: false }
-
-  Todo(url, 'POST', newTodo).then(console.log('hi'))
-})
