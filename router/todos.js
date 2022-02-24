@@ -13,11 +13,15 @@ const Todos = mongoose.model(
     date: { type: Date, default: Date.now, require: true },
   }),
 )
-function getTodos() {}
-getTodos()
-
 // Get all todos
-todoRoute.get('/', (req, res) => {})
+todoRoute.get('/', (req, res) => {
+  Todos.find()
+    .then((todos) => {
+      // if (todos.length === 0) return res.status(404).send('No Todos Now')
+      res.send(todos)
+    })
+    .catch((err) => console.error(err))
+})
 
 // Get A todo
 todoRoute.get('/:id', (req, res) => {
