@@ -54,12 +54,13 @@ todoRoute.post('/', (req, res) => {
 
 // update todo
 todoRoute.put('/:id', (req, res) => {
-  const todoId = parseInt(req.params.id)
-  const todo = todosData.find((todo) => todo.id === todoId)
+  const todoId = req.params.id
 
-  if (!todo) return res.status(404).send(`No todo with the ID ${todoId} `)
-  todo.done = req.body.done
-  res.send(todo)
+  updateTodo = req.body
+
+  Todos.findByIdAndUpdate(todoId, {
+    $set: updateTodo,
+  }).then((newTodo) => console.log(newTodo))
 })
 
 module.exports = todoRoute

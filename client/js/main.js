@@ -51,8 +51,19 @@ function getLis() {
         ? (perantElement.style.textDecoration = 'line-through')
         : (perantElement.style.textDecoration = 'none')
       let key = grandPerantElement.getAttribute('key')
-      updateTodo = !done ? { done: false } : { done: true }
-      Todo(`${url}/${key}`, 'PUT', updateTodo)
+      updateTodo = !done ? { id: key, done: false } : { id: key, done: true }
+      const request = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateTodo),
+      }
+      fetch(`${url}/${key}`, request)
+        .then(() => {
+          getTodos()
+        })
+        .catch((err) => console.error(err))
     })
   })
 }
@@ -100,18 +111,4 @@ function getTodos() {
     .catch((err) => console.log(err))
 }
 
-function Todo(url, method, data) {
-  const request = {
-    method: method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }
-  fetch(url, request)
-    .then(() => {
-      console.log('done')
-    })
-    .catch((err) => console.error(err))
-  getTodos()
-}
+function Todo(url, method, data) {}
