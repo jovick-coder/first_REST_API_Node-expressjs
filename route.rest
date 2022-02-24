@@ -1,0 +1,36 @@
+GET http://localhost:3000/
+
+###
+# get All Todos
+GET http://localhost:3000/api/todos
+
+###
+# get a todo
+GET http://localhost:3000/api/todos/02
+
+###
+# added a todo
+POST http://localhost:3000/api/todos
+Content-Type: application/json
+
+{
+  "todo":"new Todo"  
+}
+
+###
+# Delete a todo
+DELETE http://localhost:3000/api/todos/3
+
+
+
+###
+# Update a todo
+PUT http://localhost:3000/api/todos/1
+Content-Type: application/json
+
+{
+    "done":"true"
+}
+
+
+
