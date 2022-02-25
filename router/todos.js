@@ -3,8 +3,6 @@ const { default: mongoose } = require('mongoose')
 
 const todoRoute = express.Router()
 
-const todosData = []
-
 const Todos = mongoose.model(
   'Todo',
   new mongoose.Schema({

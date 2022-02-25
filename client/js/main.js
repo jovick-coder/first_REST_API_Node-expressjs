@@ -16,6 +16,7 @@ document.querySelector('#addTodo').addEventListener('click', () => {
     },
     body: JSON.stringify(newTodo),
   })
+  console.log('New Todo Added -> ', todo)
   getTodos()
 })
 
@@ -41,7 +42,7 @@ function trash() {
 
 function update() {
   const checkbox = document.querySelectorAll('#todo-list>li>label>input')
-  checkbox.forEach((div, i) => {
+  checkbox.forEach((div) => {
     div.addEventListener('click', (e) => {
       const checkbox = e.target
       const done = checkbox.checked
@@ -110,5 +111,3 @@ function getTodos() {
     })
     .catch((err) => console.log(err))
 }
-
-function Todo(url, method, data) {}
